@@ -10,7 +10,7 @@ import axios from 'axios';
  * @property {string} curriculum
  */
 
-const API_BASE_URL = process.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -27,7 +27,7 @@ const api = axios.create({
 export const generateLesson = async (data) => {
   try {
     const response = await api.post('/generate-lesson', data);
-    return response.data;
+   return response.data.lesson;
   } catch (error) {
     console.error('Error generating lesson:', error);
     if (error.response) {
